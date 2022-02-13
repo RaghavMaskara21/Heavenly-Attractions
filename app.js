@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError= require('./utils/ExpressErrors');
-const Joi=require('joi');
+const {CampgroundSchema} = require('./schemas');
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
@@ -28,6 +28,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
+
+const validateCampground = (req,res,next)=>{
+    
+      const {error} = CampgroundSchema.validate(req.body);
+      if(error){
+          const msg= error.details.map(el => el.message).join(',')
+          throw new ExpressError(msg, 400)
+      }else{
+          next();
+      }
+}
+
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -45,21 +57,8 @@ app.get("/campgrounds/new", (req, res) => {
 
 app.post(
   "/campgrounds",
-  catchAsync(async (req, res, next) => {
-      const CampgroundSchema= Joi.object({
-        campground: Joi.object({
-            title: Joi.string().required(),
-            price: Joi.number().required().min(0),
-            image: Joi.string().required(),
-            location: Joi.string().required(),
-            description: Joi.string().required()
-        }).required()
-      })
-      const {error} = CampgroundSchema.validate(req.body);
-      if(error){
-          const msg= error.details.map(el => el.message).join(',')
-          throw new ExpressError(msg, 400)
-      }
+  validateCampground, catchAsync(async (req, res, next) => {
+      
       
     const campground = new Campground(req.body.campground);
     await campground.save();
@@ -85,7 +84,7 @@ app.get(
 
 app.put(
   "/campgrounds/:id",
-  catchAsync(async (req, res) => {
+  validateCampground,catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, {
       ...req.body.campground,
