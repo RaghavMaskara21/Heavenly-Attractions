@@ -20,6 +20,7 @@
                     <button class="btn btn-danger">delete</button>
                     </form>
             </div>
+
           </div>
           <h2>Leave a review</h2>
           <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
@@ -37,6 +38,12 @@
             
             <button class="btn btn-success">Submit</button>
           </form>
+          <% for (let review of campground.reviews) { %> 
+          <div class="mb-3">
+            <p>Rating: <%= review.rating %> </p> 
+           <p>Review: <%= review.body %> </p> 
+          </div>
+          <% } %> 
     </div>
 </div>
     
