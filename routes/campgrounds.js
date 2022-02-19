@@ -28,7 +28,7 @@ router.get(
   });
   
   router.post(
-    "/campgrounds",
+    "/",
     validateCampground, catchAsync(async (req, res, next) => {
         
         
