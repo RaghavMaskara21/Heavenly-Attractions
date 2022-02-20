@@ -5,6 +5,7 @@ const catchAsync = require("../utils/catchAsync");
 const ExpressError= require('../utils/ExpressErrors');
 const Review=require('../models/reviews');
 const Campground = require("../models/campground");
+const { request } = require('express');
 
 const validateReview= (req,res,next)=>{
     const {error}= reviewSchema.validate(req.body);
@@ -22,6 +23,7 @@ router.post('/', validateReview, catchAsync(async(req,res)=>{
     campground.reviews.push(review);
     await review.save();
     await campground.save();
+    req.flash('success','successfully created new review');
     res.redirect(`/campgrounds/${campground._id}`);
   }));
   
@@ -29,7 +31,7 @@ router.post('/', validateReview, catchAsync(async(req,res)=>{
     const {id,reviewId} = req.params;
     await Campground.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
     await Review.findByIdAndDelete(reviewId);
-  
+    req.flash('success','successfully deleted review');
   res.redirect(`/campgrounds/${id}`);
   }))
 
