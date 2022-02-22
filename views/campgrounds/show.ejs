@@ -7,7 +7,7 @@
         <div class="carousel-inner">
           <% campground.images.forEach((img,i)=>{ %> 
           <div class="carousel-item <%= i===0 ? 'active':''  %> ">
-            <img src="<%= img.url %> " class="d-block w-100  " alt="...">
+            <img src="<%=img.url%> " class="d-block w-100  " alt="...">
           </div>
           <% }) %> 
         </div>
@@ -39,7 +39,7 @@
             <% if (currentUser && campground.author.equals(currentUser._id)) { %> 
             <div class="card-body">
                 <a class="card-link btn btn-info" href="/campgrounds/<%= campground._id%>/edit">Edit Campgrounds</a>
-                <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE " method="POST">
+                <form class="d-inline" action="/campgrounds/<%=campground._id %>?_method=DELETE " method="POST">
                     <button class="btn btn-danger">Delete</button>
                     </form>
             </div>
