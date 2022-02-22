@@ -7,7 +7,7 @@ const CampgroundSchema = new Schema ({
     images: [
         {
             url: String,
-            fileName: String
+            filename: String
         }
     ],
     price: Number,
