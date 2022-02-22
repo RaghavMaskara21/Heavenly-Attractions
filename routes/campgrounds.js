@@ -8,7 +8,8 @@ const { isLoggedIn, isAuthor, validateCampground } = require("../middleware");
 const campgrounds = require("../controllers/campground");
 
 const multer=require('multer');
-const upload=multer({dest: 'uploads/'});
+const {storage} = require('../cloudinary/index');
+const upload=multer({storage});
 
 
 router
