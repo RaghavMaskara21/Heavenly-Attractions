@@ -17,6 +17,7 @@ const flash=require('connect-flash');
 const passport=require('passport');
 const LocalStrategy= require('passport-local');
 const User=require('./models/user');
+const mongoSanitize= require('express-mongo-sanitize');
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
   useNewUrlParser: true,
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true })); //parsing request body
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
+app.use(mongoSanitize());
 
 const sessionConfig= {
   secret: 'useabettersecret',
@@ -60,6 +62,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
+  
   res.locals.currentUser=req.user;
   res.locals.success= req.flash('success');
   res.locals.error=req.flash('error');
