@@ -3,7 +3,8 @@
 
   <div class="row">
     <div class="col-6">
-      
+      <% if(campground.images.length>0) { %>
+                
       <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <% campground.images.forEach((img,i)=>{ %>
@@ -11,7 +12,9 @@
               <img src="<%=img.cardImage%>" class="d-block w-100" alt="..." />
             </div>
             <% }) %>
-        </div>
+        </div>        
+              
+
         <% if(campground.images.length>1){ %>
           <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -23,6 +26,9 @@
           </button>
           <% } %>
       </div>
+      <% }  else { %>
+              <img class="img-fluid" alt="" style="width: 800px; height: 600px" src="https://images.unsplash.com/photo-1472213984618-c79aaec7fef0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2055&q=80">
+              <% } %>
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">

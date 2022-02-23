@@ -4,6 +4,7 @@ const Campground = require("./models/campground");
 const Review=require('./models/reviews');
 
 module.exports.isLoggedIn= (req,res,next)=>{
+    
     if(!req.isAuthenticated()){
         req.session.returnTo= req.originalUrl;
         req.flash('error','You must be signed in');
@@ -12,7 +13,7 @@ module.exports.isLoggedIn= (req,res,next)=>{
       next();
 }
 
-module.exports.validateCampground = (req,res,next)=>{
+module.exports.validateCampground = async(req,res,next)=>{
     
     const {error} = CampgroundSchema.validate(req.body);
     if(error){
@@ -26,6 +27,11 @@ module.exports.validateCampground = (req,res,next)=>{
 module.exports.isAuthor= async(req,res,next)=>{
     const {id}=req.params;
     const campground=await Campground.findById(id);
+    if(!campground){
+        req.flash('error','No campground found');
+        return res.redirect(`/campgrounds`);
+    }
+
     if(!campground.author.equals(req.user._id)){
         req.flash('error','you do not have permission to edit');
         return res.redirect(`/campgrounds/${id}`);
