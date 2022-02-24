@@ -106,12 +106,13 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
+const secret=process.env.SECRET;
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   touchAfter: 24 * 60 * 60,
   crypto: {
-      secret: 'useabettersecret'
+    secret,
   }
 });
 
@@ -120,7 +121,7 @@ const store = MongoStore.create({
 const sessionConfig= {
   store,
   name:'session22',
-  secret: 'useabettersecret',
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
