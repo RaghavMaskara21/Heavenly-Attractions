@@ -18,13 +18,18 @@ const passport=require('passport');
 const LocalStrategy= require('passport-local');
 const User=require('./models/user');
 const mongoSanitize= require('express-mongo-sanitize');
+const dbUrl= process.env.DB_URL;
 //const helmet=require('helmet');
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp", {
+
+//"mongodb://localhost:27017/yelp-camp"
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   // useCreateIndex: true,
   useUnifiedTopology: true,
 });
+
+
 
 
 // app.use(
