@@ -1,0 +1,43 @@
+.nav-link {
+    padding: 0.25rem 0;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+}
+
+.nav-link:hover{
+    color: rgba(255,255,255,0.5);
+    border-bottom-color:rgba(255,255,255,0.5);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color:white;
+
+}
+body{
+    background: #E0EAFC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    background-size: cover;
+    background-position: center;
+}
+#ind_head{
+   color: #FE7045;
+   font-family: 'Dancing Script', cursive;
+   font-size: 80px;
+  
+    
+
+    text-align: center;
+     text-shadow: 1px 1px 2px #082b34; 
+}
+
+#icons a {
+    font-size: 3em;
+     color: whitesmoke; 
+     padding: 0 10px; 
+     text-decoration: none;
+  }

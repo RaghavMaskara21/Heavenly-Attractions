@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate')%>
 <div class="row">
-    <h1 class="text-center">New Campground</h1>
+    <h1 class="text-center">New Attraction</h1>
     <div class="col-md-6 offset-md-3">
         <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
@@ -22,7 +22,7 @@
             
             
             <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
+                <label class="form-label" for="price">Price</label>
                 <div class="input-group">
                     <span class="input-group-text" id="price-label">$</span>
                     <input type="number" class="form-control" id="price" placeholder="0.00" aria-label="price"
@@ -45,10 +45,10 @@
               </div>
             
             <div class="mb-3">
-                <button class="btn btn-success">Add Campground</button>
+                <button class="btn btn-success">Add Attraction</button>
             </div>
         </form>
-        <a href="/campgrounds">All Campgrounds</a>
+        <a class="btn btn-warning" href="/campgrounds">All Attractions</a>
     </div>
 </div>
 
