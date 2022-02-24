@@ -19,6 +19,7 @@ const LocalStrategy= require('passport-local');
 const User=require('./models/user');
 const mongoSanitize= require('express-mongo-sanitize');
 const dbUrl= process.env.DB_URL;
+const MongoStore = require('connect-mongo');
 //const helmet=require('helmet');
 
 
@@ -106,9 +107,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 60 * 60,
+  crypto: {
+      secret: 'useabettersecret'
+  }
+});
+
 
 
 const sessionConfig= {
+  store,
   name:'session22',
   secret: 'useabettersecret',
   resave: false,
