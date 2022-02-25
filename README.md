@@ -1,6 +1,6 @@
 # Heavenly Attractions
 
-##It is a responsive web application designed to add, rate and review different Attractions, different users can put in their comments and concerns, so that it is a well informed and well prepared trip for people visiting the place in future.
+## It is a responsive web application designed to add, rate and review different Attractions, different users can put in their comments and concerns, so that it is a well informed and well prepared trip for people visiting the place in future.
 
 ## Live Demo
 
