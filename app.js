@@ -30,6 +30,12 @@ mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
 });
 
+const http = require("http");
+setInterval(function() {
+    http.get("https://heavenlyattractions.herokuapp.com/");
+    http.get("https://raghavmaskara21.github.io/HayDayPriceCalculator.github.io/");
+
+}, 60000); // every 5 minutes (300000)
 
 
 
